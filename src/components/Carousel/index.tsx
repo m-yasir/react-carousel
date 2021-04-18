@@ -68,6 +68,7 @@ function Carousel() {
 	// 		getCarousel()
 	// 			.then((response) => {
 	// 				setCarouselItems(response);
+	// 				setCarouselDisplayItems(response.slice(0, VISIBLE_BLOCKS))
 	// 			})
 	// 			.catch((err) => {
 	// 				console.error(err);
@@ -76,8 +77,6 @@ function Carousel() {
 	// 	fetchCarousel();
 	// }, []);
 
-	// TODO: Do Something when carousel slides, like animation
-	useEffect(() => {}, [currentOffset]);
 	// Initialise component
 	useEffect(() => {
 		setCarouselDisplayItems(DEFAULT_CAROUSELS.slice(0, VISIBLE_BLOCKS));
