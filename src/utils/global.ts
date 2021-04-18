@@ -1,5 +1,8 @@
 import { API_METHODS } from "../types/global";
 
+/**
+ * @description custom fetch wrapper to handle simple response nuances
+ */
 export async function _fetch<T>(
 	url: string,
 	method: API_METHODS = "GET",

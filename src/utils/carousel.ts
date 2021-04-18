@@ -1,7 +1,5 @@
 /**
- * returns a random index for a given array length using Math.random
- * 
- * Note: The function returns 0 if length is 0
+ * @description returns a random index for a given array length using Math.random
  */
 export function generateRandomIndex(length: number): number {
     return Math.floor(Math.random() * length);
