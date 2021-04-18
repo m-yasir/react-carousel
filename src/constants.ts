@@ -6,7 +6,7 @@ export const CAROUSEL_IMAGE_DIMENSIONS = {
 	height: 400
 };
 
-// Carousel Blocks in view
+// Carousel Blocks in view; adjustable.
 export const VISIBLE_BLOCKS = 4;
 
 // It is assumed there would be at least one image for each block.
