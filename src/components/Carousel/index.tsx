@@ -108,16 +108,15 @@ const defaultCarousels: BlockDetail[] = [
 ];
 
 // Blocks in view
-const VISIBLE_BLOCKS = 4;
-const OFFSET = 4;
+const VISIBLE_BLOCKS = 5;
 
 function Carousel() {
-    const [carouselItems, setCarouselItems] = useState<BlockDetail[]>(defaultCarousels);
-    const [carouselDisplayItems, setCarouselDisplayItems] = useState<BlockDetail[]>(
+    const [carouselItems, setCarouselItems] = useState<BlockDetail[]>(
         // Setting carousel as it is and using pickRandom in the component which would change image on each render for the sake of simplicity
         // We could pre process and set random image url before rendering
-        []
+        defaultCarousels
     );
+    const [carouselDisplayItems, setCarouselDisplayItems] = useState<BlockDetail[]>([]);
     const [currentOffset, setCurrentOffset] = useState<number>(0);
 
     useLog(currentOffset, "CAROUSEL_OFFSET");
@@ -129,16 +128,25 @@ function Carousel() {
 		);
 	};
 
+    // Handles Navigation for sliding carousel forward
 	const slideNext = () => {
-        const offset = currentOffset + OFFSET;
-		setCurrentOffset(offset);
-        setCarouselDisplayItems(takeCarouselItems(offset, VISIBLE_BLOCKS + offset))
+        const offset = currentOffset + VISIBLE_BLOCKS;
+        const next = offset + VISIBLE_BLOCKS;
+        let items = takeCarouselItems(offset, next);
+        // copy items ahead if there are not enough items in array
+        // NOTE: The next buttons will be disabled after this.
+        if (next > carouselItems.length) {
+            items = items.concat(takeCarouselItems(0, next - carouselItems.length));
+        }
+        setCurrentOffset(offset);
+        setCarouselDisplayItems(items);
 	};
 
+    // Handles Navigation for sliding carousel backwards
 	const slidePrev = () => {
-		const offset = currentOffset - OFFSET;
+		const offset = currentOffset - VISIBLE_BLOCKS;
+        setCarouselDisplayItems(takeCarouselItems(offset, currentOffset))
 		setCurrentOffset(offset);
-        setCarouselDisplayItems(takeCarouselItems(offset, VISIBLE_BLOCKS - offset))
 	};
 
     const takeCarouselItems = useCallback((offset: number, n: number) => {
@@ -178,7 +186,7 @@ function Carousel() {
 				<Button
 					onClick={slideNext}
 					disabled={
-						currentOffset + VISIBLE_BLOCKS === carouselItems.length
+						currentOffset + VISIBLE_BLOCKS >= carouselItems.length
 					}
 				>
 					<Icon name="arrow right" />
