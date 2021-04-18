@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-// Simple log for react states
+// Log for react states
 function useLog<T>(state: T, key?: string) {
 	useEffect(() => {
 		console.log("STATE UPDATED:");

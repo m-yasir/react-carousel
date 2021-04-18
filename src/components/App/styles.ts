@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export const AppContainer = styled.div`
-    margin: 10px;
+    margin: 50px 10px;
 `;
