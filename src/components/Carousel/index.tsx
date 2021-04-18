@@ -5,7 +5,7 @@ import CarouselBlock from "./CarouselBlock";
 
 import { getCarousel } from "../../api/carousel";
 import { BlockDetail } from "../../types/carousel";
-import { pickRandom } from "../../utils/carousel";
+import { pickRandom, take } from "../../utils/carousel";
 
 import useLog from "../../hooks/useLog";
 
@@ -57,7 +57,7 @@ function Carousel() {
 
 	const takeCarouselItems = useCallback(
 		(offset: number, n: number) => {
-			return carouselItems.slice(offset, n);
+			return take(carouselItems, offset, n);
 		},
 		[carouselItems]
 	);
@@ -68,7 +68,7 @@ function Carousel() {
 	// 		getCarousel()
 	// 			.then((response) => {
 	// 				setCarouselItems(response);
-	// 				setCarouselDisplayItems(response.slice(0, VISIBLE_BLOCKS))
+	// 				setCarouselDisplayItems(take(response, 0, VISIBLE_BLOCKS))
 	// 			})
 	// 			.catch((err) => {
 	// 				console.error(err);
@@ -79,7 +79,7 @@ function Carousel() {
 
 	// Initialise component
 	useEffect(() => {
-		setCarouselDisplayItems(DEFAULT_CAROUSELS.slice(0, VISIBLE_BLOCKS));
+		setCarouselDisplayItems(take(DEFAULT_CAROUSELS, 0, VISIBLE_BLOCKS));
 	}, []);
 
 	return (

@@ -14,3 +14,7 @@ export function pickRandom<T>(array: T[]): T {
     const index = generateRandomIndex(array.length);
     return array[index];
 }
+
+export function take<T>(items: T[], offset: number, n: number) {
+    return items.slice(offset, n);
+}
