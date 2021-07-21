@@ -1,4 +1,4 @@
-# React Carousel
+# [WIP] React Carousel (Proof of Concept)
 
 A simple exercise for creating a carousel in React.
 User interface was not a priority but it's responsive still.
